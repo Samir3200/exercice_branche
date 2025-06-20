@@ -1,0 +1,1 @@
+console.log("le script est chargé")
