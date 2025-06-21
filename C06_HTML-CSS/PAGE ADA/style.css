@@ -1,0 +1,17 @@
+ body
+ { background-color: pink;}
+
+#rose
+ { color: hotpink ;font-family: 'comic sans ms', cursive; text-align: center;}
+ 
+img {
+    width: 40%;
+    display: block;
+    margin: auto ;
+    border-radius: 50%; border: 5px solid hotpink}
+p1
+{text-align: center; color: hotpink; font-family: 'comic sans ms', cursive}
+
+#bottom
+{text-align: center;}
+ol{color: hotpink;}
