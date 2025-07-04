@@ -1,10 +1,8 @@
 
-const container = (citation,author)
-const citation = document.getElementById("text")
-const author = document.getElementById("author")
+const form = document.getElementById("formulaire")
+formulaire.addEventListener("submmit" , (event) => {
+const text = document.getElementsByid("citations")
+const author = document.getElementsByid("nomAuthor")
+console.log(`${text},${author}`)
+})
 
-.addEventListener("input", ) () => {
-    citation.innerText="text"
-
-
-}
