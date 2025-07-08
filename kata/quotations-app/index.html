@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quotations</title>
-    <link rel="stylesheet" href =style.css>
+    <link rel="stylesheet" href=style.css>
     <script defer src="script.js"></script>
 </head>
 
@@ -13,21 +13,23 @@
     <h1>Mes citations</h1>
     <h2>Gestionnaire de citation en ligne</h2>
     <h3 id="numberCitation">0</h3>
-    <hr></hr>
+    <hr>
+    </hr>
     <form id="formulaire">
-        <label>Citations
-            <input type="text" name="citation" id="Citations"></label>
-        <label>Auteur(e)s
-            <input type="text" name="Nomauteur" id="nomAuteur">
-        </label>
-        <button id="submmit">Soumettre</button>
-        <div id="quote-list">
-            <div class="quote">
-                <p class="text"></p>
-                <p class="author"></p>
-            </div>
-        </div>
+        <label>citations</label>
+        <input type="text" id="citation">
+
+        <label>Auteur(e)s</label>
+        <input type="text" id="nomAuthor">
+
+        <button type="submit">Soumettre</button>
     </form>
+    <div id="quote-list">
+        <!--<div class="quote">
+        <p id="text">il pleut</p>
+            <p id="author">Samir</p>
+        </div>-->
+    </div>
 </body>
 
 </html>
