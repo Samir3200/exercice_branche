@@ -38,11 +38,14 @@ console.log(obj.candidate)
 
 
 let age = 0
-let person = data.length
+let nbrPerson = data.length
 for (let i = 0; i < data.length; i++) {
-    age = age += data[i].age
+    age += data[i].age
 }
-console.log(age/data.length)
+console.log(age/nbrPerson)
+
+moyenne = age/nbrPerson
+console.log(`La moyenne d'age des personnes est égale à ${moyenne} ans`)
 
 
 
