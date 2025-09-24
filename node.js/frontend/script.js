@@ -1,25 +1,8 @@
-// import http from "node:http"
-// const server = http.createServer((req, res) => {
-//     if (req.url === "/") {
-//         res.setHeader("Content-Type", "text/plain; charset=utf-8");
-//         res.end("Accueil");
-//     }
-//     else if (req.url === "/menu") {
-//         // res.end("Voici le menu");
-//         const data = { "plate": "Hello World Burger", "description": "Un cheeseburger classique (pain, steak, fromage, salade, sauce).", "image": "🍔" };
-//         res.end(JSON.stringify(data));
-//     }
-//     else { res.statusCode = 404; res.end("Page non trouvée"); }
-// });
-// server.listen(3000, () => {
-//     console.log("Serveur lancé sur http://localhost:3000");
-// });
 
-
-console.log("✅ script.js chargé");
+console.log("script.js chargé");
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Page index.html
+
   const btn = document.getElementById("valider");
   const input = document.getElementById("prenom");
 
@@ -35,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Page menu.html
   const welcome = document.getElementById("welcome");
   const menuList = document.getElementById("menu-list");
 
@@ -43,7 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const prenom = localStorage.getItem("prenom") || "invité";
     welcome.textContent = `Bienvenue ${prenom} ! 👋`;
 
-    fetch("http://localhost:3000/menu")
+    fetch("http://localhost:3000/env")
+      .then(res => res.json())
+      .then(envData => {
+       
+        return fetch("http://localhost:3000/menus");
+      })
       .then(res => res.json())
       .then(data => {
         menuList.innerHTML = data.map(item => `
@@ -55,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch(err => {
         console.error("Erreur fetch :", err);
-        menuList.innerHTML = "<p>⚠️ Impossible de charger le menu</p>";
+        menuList.innerHTML = "<p>Impossible de charger le menu</p>";
       });
   }
 });

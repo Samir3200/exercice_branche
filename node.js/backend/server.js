@@ -1,31 +1,66 @@
+
+
 import express from "express";
 import cors from "cors";
-import data from "./data.json" with { type: "json" };
+import dotenv from "dotenv";
+import { Client } from "pg";
+dotenv.config();
+
+// Connexion à PostgreSQL
+const client = new Client({
+  connectionString: process.env.psql,
+  ssl: { rejectUnauthorized: false }
+});
+
+console.log(client)
+client.connect().then(() => {
+  console.log("Connecté à PostgreSQL");
+}).catch(err => {
+  console.error("Erreur connexion PostgreSQL:", err);
+});
 
 const app = express();
 const PORT = 3000;
 
-// Autoriser le frontend (sur port 5500 si tu utilises Live Server)
+
 app.use(cors({ origin: "http://127.0.0.1:5500" }));
 
-// Route d'accueil
+// Nouvelle route pour exposer la variable d'environnement
+app.get("/env", (req, res) => {
+  res.json({ db_link: process.env.psql });
+});
 app.get("/", (req, res) => {
-  res.send("Bienvenue sur l'API Adalicious 🚀");
+  res.send("http://127.0.0.1/index.html");
 });
 
-// Route menu
-app.get("/menu", (req, res) => {
-  res.json(data);
+
+app.get("/menus", async (req, res) => {
+  try {
+    // Remplace 'menu' par le nom de ta table réelle
+    const result = await client.query("SELECT plate, description, image FROM menus");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Erreur requête menu:", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
 });
 
-// Route menu/:id
-app.get("/menu/:id", (req, res) => {
+
+app.get("/menu/:id", async (req, res) => {
   const id = Number(req.params.id);
-  const plat = data.find(p => p.id === id);
-  if (!plat) return res.status(404).json({ error: `Plat id=${id} non trouvé` });
-  res.json(plat);
+  try {
+    // Remplace 'menu' par le nom de ta table réelle
+    const result = await client.query("SELECT * FROM menu WHERE id = $1", [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: `Plat id=${id} non trouvé` });
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Erreur requête menu/:id:", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Serveur lancé sur http://localhost:${PORT}`);
+  console.log(`Serveur lancé sur http://localhost:${PORT}`);
 });
