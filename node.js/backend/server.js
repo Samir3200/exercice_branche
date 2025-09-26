@@ -1,5 +1,4 @@
 
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -12,55 +11,50 @@ const client = new Client({
   ssl: { rejectUnauthorized: false }
 });
 
-console.log(client)
-client.connect().then(() => {
-  console.log("Connecté à PostgreSQL");
-}).catch(err => {
-  console.error("Erreur connexion PostgreSQL:", err);
-});
+client.connect()
+  .then(() => console.log("✅ Connecté à PostgreSQL"))
+  .catch(err => console.error("❌ Erreur connexion PostgreSQL:", err));
 
 const app = express();
 const PORT = 3000;
 
+app.use(cors());
+app.use(express.json());
 
-app.use(cors({ origin: "http://127.0.0.1:5500" }));
+// Servir tes fichiers HTML/JS/CSS depuis un dossier "public"
+app.use(express.static("public"));
 
-// Nouvelle route pour exposer la variable d'environnement
-app.get("/env", (req, res) => {
-  res.json({ db_link: process.env.psql });
-});
-app.get("/", (req, res) => {
-  res.send("http://127.0.0.1/index.html");
-});
+// ROUTES
 
-
+// Liste des plats
 app.get("/menus", async (req, res) => {
   try {
-    // Remplace 'menu' par le nom de ta table réelle
-    const result = await client.query("SELECT plate, description, image FROM menus");
+    const result = await client.query("SELECT id, plate, description, image FROM menus");
     res.json(result.rows);
   } catch (err) {
-    console.error("Erreur requête menu:", err);
     res.status(500).json({ error: "Erreur serveur" });
   }
 });
 
-
-app.get("/menu/:id", async (req, res) => {
-  const id = Number(req.params.id);
+// Ajouter une commande
+app.post("/orders", async (req, res) => {
   try {
-    // Remplace 'menu' par le nom de ta table réelle
-    const result = await client.query("SELECT * FROM menu WHERE id = $1", [id]);
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: `Plat id=${id} non trouvé` });
+    const { id, plate, clientName } = req.body;
+    if (!id || !clientName) {
+      return res.status(400).json({ ok: false, error: "id et clientName requis" });
     }
-    res.json(result.rows[0]);
+
+    const result = await client.query(
+      "INSERT INTO orders (id_menu, client_name) VALUES ($1, $2) RETURNING *",
+      [id, clientName]
+    );
+
+    res.json({ ok: true, message: `Commande enregistrée pour ${plate}`, order: result.rows[0] });
   } catch (err) {
-    console.error("Erreur requête menu/:id:", err);
-    res.status(500).json({ error: "Erreur serveur" });
+    res.status(500).json({ ok: false, error: "Impossible d'enregistrer la commande" });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Serveur lancé sur http://localhost:${PORT}`);
+  console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
 });
