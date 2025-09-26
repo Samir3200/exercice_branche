@@ -1,0 +1,276 @@
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  color: grey;
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 375px) {
+  .grid {
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 5rem;
+  }
+
+
+  .title,
+  .text {
+    text-align: center;
+  }
+
+  .title {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+
+  .email-form {
+    max-width: 400px;
+  }
+
+  .logo {
+    margin-bottom: 3rem;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: flex;
+  background-size: cover;
+}
+
+.grid {
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+.logo {
+  margin-bottom: 2rem;
+}
+
+.logo img {
+  width: 120px;
+}
+
+
+.picture img {
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.title span {
+  font-weight: 300;
+  color: hsl(0, 36%, 70%);
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: black;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+
+.email-form {
+  display: flex;
+  align-items: center;
+  border: 1px solid hsl(0, 36%, 70%);
+  border-radius: 25px;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: 1rem;
+}
+
+.email-form input {
+  flex: 1;
+  padding: 0.8rem 0.5rem;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  color: hsl(0, 6%, 24%);
+  background-color: transparent;
+}
+
+.email-form input::placeholder {
+  color: hsl(0, 36%, 70%);
+}
+
+.email-form button {
+  background: linear-gradient(to right, hsl(0, 80%, 86%), hsl(0, 74%, 74%));
+  border: none;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.email-form button:hover {
+  opacity: 0.85;
+}
+
+.email-form button img {
+  width: 16px;
+}
+
+
+footer {
+  margin-top: 19rem;
+  font-size: 0.75rem;
+  color: black;
+  text-align: center;
+  background-color: hsl(0, 36%, 70%);
+  height: 30px;
+  align-content: center;
+}
+
+footer a {
+  color: blue;
+  text-decoration: none;
+}
+
+
+
+@media screen and (min-width: 1023px) {
+  .grid {
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items:flex-end;
+    gap: 5rem;}
+
+    body {
+  font-family: 'Josefin Sans', sans-serif;
+  color: grey;
+  min-height: 100vh;
+}
+  }
+.title,
+  .text {
+    text-align:left;
+  }
+
+  .title {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+
+  .email-form {
+    max-width: 400px;
+  }
+
+  .logo {
+    margin-bottom: 3rem;
+  }
+
+
+img {
+  max-width: 100%;
+  display: flex;
+  background-size: cover;
+}
+
+.grid {
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+.logo {
+  margin-bottom: 2rem;
+}
+
+.logo img {
+  width: 120px;
+}
+
+
+.picture img {
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.title span {
+  font-weight: 300;
+  color: hsl(0, 36%, 70%);
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: black;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+
+.email-form {
+  display: flex;
+  align-items: center;
+  border: 1px solid hsl(0, 36%, 70%);
+  border-radius: 25px;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: 1rem;
+}
+
+.email-form input {
+  flex: 1;
+  padding: 0.8rem 0.5rem;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  color: hsl(0, 6%, 24%);
+  background-color: transparent;
+}
+
+.email-form input::placeholder {
+  color: hsl(0, 36%, 70%);
+}
+
+.email-form button {
+  background: linear-gradient(to right, hsl(0, 80%, 86%), hsl(0, 74%, 74%));
+  border: none;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.email-form button:hover {
+  opacity: 0.85;
+}
+
+.email-form button img {
+  width: 16px;
+}
